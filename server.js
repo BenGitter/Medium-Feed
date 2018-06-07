@@ -9,6 +9,9 @@ require('dotenv').config();
 const port = 3000;
 const app = express();
 
+// Set view engine
+app.set('view engine', 'ejs');
+
 // Set static folder
 app.use(express.static('public'));
 
@@ -20,7 +23,11 @@ const client = new medium.MediumClient({
 
 const redirectURL = 'http://127.0.0.1:3000/callback/medium';
 
-
+app.get('/', (req, res) => {
+  res.render('index', {
+    publications: []
+  });
+})
 
 // API Endpoint
 app.get('/api', (req, res) => res.send('API Endpoint'));
@@ -51,7 +58,9 @@ app.get('/callback/medium', (req, res) => {
       }, (err, publications) => {
         if(err) res.json({err});
 
-        res.json({publications});
+        res.render('index', {
+          publications
+        })
       });
     });
   });

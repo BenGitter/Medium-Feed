@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/BenGitter/Medium-Feed#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "medium-sdk": "0.0.4"
   },
