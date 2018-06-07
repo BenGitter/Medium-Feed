@@ -8,17 +8,9 @@
   <title>Medium Feed</title>
 </head>
 <body>
-  <h1>Medium Feed</h1>
 
-  <ul>
-    <% publications.forEach((publication) => { %>
-      <li><%= publication.name %></li>
-    <% }) %>
-  </ul>
+  <h1 class="page-title-intro">Medium Feed</h1>
+  <a href="/auth" class="auth">Authenticate</a>
 
-  
-  <script>
-    window.history.pushState("", "", '/');
-  </script>
 </body>
 </html>

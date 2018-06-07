@@ -20,7 +20,9 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.3",
-    "medium-sdk": "0.0.4"
+    "medium-sdk": "0.0.4",
+    "moment": "^2.22.2",
+    "request": "^2.87.0"
   },
   "devDependencies": {
     "dotenv": "^6.0.0"

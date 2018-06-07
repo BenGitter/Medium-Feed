@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Medium Feed</title>
+</head>
+<body>
+  <h1 class="page-title">Medium Feed</h1>
+  
+  <% posts.forEach((post) => { %>
+    <div class="post">
+      <div class="left">
+        <img src="<%= post.authorImg %>" />
+        <span class="author"><%= post.author %></span>
+        <span>in</span>
+        <span class="publication"><%= post.pubName %></span>
+        <span class="date"><%= post.formattedDate %> - <%= post.readingTime %></span>
+      </div>
+      <div class="right">
+        <a href="<%= post.url %>">
+          <h2 class="title"><%= post.title %></h2>
+          <p class="subtitle"><%= post.subtitle %></p>
+        </a>
+      </div>
+    </div>
+  <% }) %>
+  
+  <script>
+    window.history.pushState("", "", '/');
+  </script>
+</body>
+</html>

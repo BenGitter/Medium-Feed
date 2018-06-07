@@ -1,6 +1,8 @@
 // Dependencies
 const express = require('express');
 const medium = require('medium-sdk');
+const moment = require('moment');
+const request = require('request');
 
 // Import environment variables
 require('dotenv').config();
@@ -25,7 +27,7 @@ const redirectURL = 'http://127.0.0.1:3000/callback/medium';
 
 app.get('/', (req, res) => {
   res.render('index', {
-    publications: []
+    posts: []
   });
 })
 
@@ -53,18 +55,73 @@ app.get('/callback/medium', (req, res) => {
     client.getUser((err, user) => {
       if(err) res.json({err});
 
-      client.getPublicationsForUser({
-        userId: user.id
-      }, (err, publications) => {
+      getPosts(user, (err, posts) => {
         if(err) res.json({err});
 
-        res.render('index', {
-          publications
-        })
+        res.render('feed', {posts});
       });
     });
   });
 });
+
+function getPosts(user, callback){
+  client.getPublicationsForUser({
+    userId: user.id
+  }, (err, publications) => {
+    if(err) callback(err);
+      let allPosts = [];
+      let counter = 0;
+
+      publications.forEach((publication) => {
+        getLatestPostsFromPublication(publication.url, (err, posts) => {
+          counter++;
+          allPosts = allPosts.concat(posts);
+          
+          if(counter == publications.length){
+            allPosts.sort((a, b) => b.createdAt-a.createdAt);
+            callback(null, allPosts);
+          }
+        });
+      });
+    
+  });
+}
+
+function getLatestPostsFromPublication(url, callback){
+  const pubURL = url + '/latest';
+
+  request({
+    url: pubURL,
+    headers: {
+      'Accept': 'application/json'
+    }
+  }, (err, res, body) => {
+    if(err) callback(err);
+
+    const json = JSON.parse(body.substr(16)).payload;
+    let posts = json.posts;
+    let editedPosts = [];
+    const domain = json.collection.domain || 'medium.com/' + json.collection.slug;
+    
+    posts.forEach((post, i) => {
+      const date = new Date(post.createdAt);
+
+      editedPosts[i] = {
+        url: 'https://' + domain + '/' + post.uniqueSlug,
+        pubName: json.collection.name,
+        formattedDate: moment(date).format('MMM D'),
+        author: json.references.User[post.creatorId].name,
+        authorImg: 'https://cdn-images-1.medium.com/fit/c/160/160/' + json.references.User[post.creatorId].imageId,
+        readingTime: Math.ceil(post.virtuals.readingTime) + ' min',
+        title: post.title,
+        subtitle: post.virtuals.subtitle,
+        createdAt: post.createdAt
+      };
+    });
+
+    callback(null, editedPosts);
+  });
+}
 
 // Start server
 app.listen(port, () => console.log(`App listening on port ${port}.`));

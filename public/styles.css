@@ -1,0 +1,68 @@
+body{
+  background: rgb(255,250,255);
+  font-family: sans-serif;
+  margin: 0;
+  top: 0;
+}
+
+.page-title{
+  margin-left: 5vw;
+  margin-top: 30px;
+}
+.page-title-intro{
+  text-align: center;
+  margin-top: calc(50vh - 200px);
+  font-weight: normal;
+  color: #888;
+  font-size: 100px;
+  margin-bottom: 0;
+}
+.auth{
+  background: rgb(255,150,255);
+  color: white;
+  padding: 10px 50px 10px calc(70vw - 95px);
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.post{
+  background: white;
+  border: 1px solid #CCC;
+  border-radius: 5px;
+  width: 90vw;
+  margin: 10px 5vw;
+  display: grid;
+  grid-template-columns: 140px auto;
+  box-sizing: border-box;
+}
+
+.left{
+  padding: 30px 5px;
+  display: grid;
+  grid-template-rows: 90px 12px 10px 20px auto;
+  justify-items: center;
+  font-size: 10px;
+  color: #333;
+}
+.left img{
+  max-height: 80px;
+  max-width: 100px;
+  border-radius: 50px;
+}
+.left .date{
+  color: #555;
+}
+
+.right{
+  margin: 20px 0;
+  padding: 0 10px;
+  border-left: 1px solid #CCC;
+}
+.right a{
+  color: #222;
+  text-decoration: none;
+}
+.right .subtitle{
+  color: #555;
+}
