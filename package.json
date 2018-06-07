@@ -1,7 +1,7 @@
 {
-  "name": "Medium-Feed",
+  "name": "medium-feed",
   "version": "1.0.0",
-  "description": "Shows you all new posts from persons and publications you follow",
+  "description": "Shows you all new posts from publications you follow",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
