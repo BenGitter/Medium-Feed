@@ -1,0 +1,27 @@
+{
+  "name": "Medium-Feed",
+  "version": "1.0.0",
+  "description": "Shows you all new posts from persons and publications you follow",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BenGitter/Medium-Feed.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BenGitter/Medium-Feed/issues"
+  },
+  "homepage": "https://github.com/BenGitter/Medium-Feed#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "medium-sdk": "0.0.4"
+  },
+  "devDependencies": {
+    "dotenv": "^6.0.0"
+  }
+}
